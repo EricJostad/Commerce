@@ -19,3 +19,7 @@ class Bid(models.Model):
 
 class Comment(models.Model):
     pass
+
+
+class Watchlist(models.Model):
+    pass
