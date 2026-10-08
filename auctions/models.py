@@ -8,7 +8,9 @@ class User(AbstractUser):
 
 
 class Auction(models.Model):
-    pass
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    title = models.CharField(max_length=100)
+    description = models.TextField()
 
 
 class Bid(models.Model):
