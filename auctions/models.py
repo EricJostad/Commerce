@@ -16,12 +16,18 @@ class Auction(models.Model):
 
 
 class Bid(models.Model):
-    pass
+    user = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
+    auction = models.ForeignKey(Auction, on_delete=models.CASCADE)
+    bid_amount = models.DecimalField(
+        max_digits=10, decimal_places=2, default=0.0)
 
 
 class Comment(models.Model):
-    pass
+    user = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
+    auction = models.ForeignKey(Auction, on_delete=models.CASCADE)
+    content = models.TextField(blank=True, null=True)
 
 
 class Watchlist(models.Model):
-    pass
+    user = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
+    auction = models.ForeignKey(Auction, on_delete=models.CASCADE)
