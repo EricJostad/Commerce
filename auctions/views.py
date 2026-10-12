@@ -64,4 +64,4 @@ def register(request):
 
 
 def create_listing(request):
-    pass
+    return render(request, "auctions/create_listing.html")
