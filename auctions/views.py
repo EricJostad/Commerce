@@ -1,3 +1,4 @@
+from django import forms
 from django.contrib.auth import authenticate, login, logout
 from django.db import IntegrityError
 from django.http import HttpResponse, HttpResponseRedirect
@@ -5,6 +6,13 @@ from django.shortcuts import render
 from django.urls import reverse
 
 from .models import User, Auction, Bid, Comment
+
+
+class AuctionForm(forms.ModelForm):
+    class Meta:
+        model = Auction
+        fields = ["title", "description",
+                  "starting_bid", "image_url", "category"]
 
 
 def index(request):
