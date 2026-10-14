@@ -75,7 +75,7 @@ def create_listing(request):
     if request.method == "POST":
         form = AuctionForm(request.POST)
         if form.is_valid():
-            auction = form
+            auction = form.save(commit=False)
             auction.user = request.user
             auction.save()
             return HttpResponseRedirect(reverse("auctions:index"))
