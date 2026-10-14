@@ -72,6 +72,17 @@ def register(request):
 
 
 def create_listing(request):
+    if request.method == "POST":
+        form = AuctionForm(request.POST)
+        if form.is_valid():
+            auction = form
+            auction.user = request.user
+            auction.save()
+            return HttpResponseRedirect(reverse("auctions:index"))
+    else:
+        return render(request, "auctions/create_listing.html", {
+            "form": AuctionForm()
+        })
     return render(request, "auctions/create_listing.html")
 
 
