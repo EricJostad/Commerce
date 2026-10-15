@@ -16,7 +16,10 @@ class AuctionForm(forms.ModelForm):
 
 
 def index(request):
-    return render(request, "auctions/index.html")
+    auction = Auction.objects.all()
+    return render(request, "auctions/index.html", {
+        "auctions": auction
+    })
 
 
 def login_view(request):
