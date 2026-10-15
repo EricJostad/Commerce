@@ -5,9 +5,10 @@
     <ul>
         {% for auction in auctions %}
             <li>
-                <p>{{ auction.title }}</p>
+                <a href="{% url 'auctions:listing' auction.id %}">{{ auction.title }}</a>
             </li>
         {% empty %}
             <li>No active listings.</li>
         {% endfor %}
+    </ul>
 {% endblock %}
