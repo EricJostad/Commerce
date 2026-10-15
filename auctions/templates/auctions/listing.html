@@ -7,7 +7,7 @@
 {% endblock %}
 
 {% block body %}
-    <h2>Listing</h2>
-
-    TODO
+    <h2>{{ auction.title }}</h2>
+    <p>{{ auction.description }}</p>
+    <p>Current Bid: ${{ auction.current_bid }}</p>
 {% endblock %}
