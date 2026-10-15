@@ -10,4 +10,11 @@
     <h2>{{ auction.title }}</h2>
     <p>{{ auction.description }}</p>
     <p>Current Bid: ${{ auction.current_bid }}</p>
+    {% if user.is_authenticated %}
+        <form method="post" action="{% url 'auctions:watchlist' %}">
+            {% csrf_token %}
+            <input type="hidden" name="auction_id" value="{{ auction.id }}">
+            <button type="submit">Add to Watchlist</button>
+        </form>
+    {% endif %}
 {% endblock %}
