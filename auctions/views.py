@@ -74,10 +74,11 @@ def register(request):
         return render(request, "auctions/register.html")
 
 
-def listing(request, auction_id):
+def listing(request, auction_id, auction_title):
     auction = Auction.objects.get(pk=auction_id)
     return render(request, "auctions/listing.html", {
-        "auction": auction
+        "auction": auction,
+        "auction_title": auction_title
     })
 
 
