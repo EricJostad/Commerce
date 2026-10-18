@@ -11,7 +11,7 @@
     <p>{{ auction.description }}</p>
     <p>Current Bid: ${{ auction.current_bid }}</p>
     {% if user.is_authenticated %}
-        <form method="post" action="{% url 'auctions:watchlist' %}">
+        <form action="{% url 'auctions:watchlist' %}" method="post">
             {% csrf_token %}
             <input type="hidden" name="auction_id" value="{{ auction.id }}">
             <button type="submit">Add to Watchlist</button>
