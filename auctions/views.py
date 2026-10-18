@@ -15,6 +15,12 @@ class AuctionForm(forms.ModelForm):
                   "starting_bid", "image_url", "category"]
 
 
+class WatchlistForm(forms.ModelForm):
+    class Meta:
+        model = Watchlist
+        fields = ["auction_id", "user_id"]
+
+
 def index(request):
     auction = Auction.objects.all()
     return render(request, "auctions/index.html", {
