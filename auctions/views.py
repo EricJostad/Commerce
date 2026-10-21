@@ -98,6 +98,11 @@ def create_listing(request):
 
 
 def watchlist(request):
+    if request.method == "POST":
+        auction_id = request.POST.get("auction_id")
+        auction = Auction.objects.get(pk=auction_id)
+        watchlist_entry = Watchlist(user=request.user, auction=auction)
+        watchlist_entry.save()
     watching = Watchlist.objects.filter(user=request.user)
     return render(request, "auctions/watchlist.html", {
         "watching": watching
