@@ -10,7 +10,7 @@
     {% if watching %}
         {% for item in watching %}
             <li>
-                {{ item.auction.title }}
+                <a href="{% url 'auctions:listing' item.auction.id item.auction.title %}">{{ item.auction.title }}</a>
             </li>
         {% endfor %}
     {% else %}
