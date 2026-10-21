@@ -6,5 +6,15 @@
 
 {% block body %}
     <h2>Watchlist</h2>
-    TODO
+    <ul>
+    {% if watching %}
+        {% for item in watching %}
+            <li>
+                {{ item.auction.title }}
+            </li>
+        {% endfor %}
+    {% else %}
+        <p>You are not watching any auctions.</p>
+    {% endif %}
+    </ul>
 {% endblock %}
