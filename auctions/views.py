@@ -76,9 +76,12 @@ def register(request):
 
 def listing(request, auction_id, auction_title):
     auction = Auction.objects.get(pk=auction_id)
+    is_watching = Watchlist.objects.filter(
+        user=request.user, auction=auction).exists()
     return render(request, "auctions/listing.html", {
         "auction": auction,
-        "auction_title": auction_title
+        "auction_title": auction_title,
+        "is_watching": is_watching
     })
 
 
