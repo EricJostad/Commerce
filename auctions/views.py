@@ -101,15 +101,17 @@ def create_listing(request):
 
 
 def watchlist(request):
+    add_item = request.POST.get("add")
+    remove_item = request.POST.get("remove")
     if request.method == "POST":
-        auction_id = request.POST.get("auction_id")
-        auction = Auction.objects.get(pk=auction_id)
-        watchlist_entry = Watchlist(user=request.user, auction=auction)
-        watchlist_entry.save()
-    if request.method == "GET":
-        auction_id = request.GET.get("auction_id")
-        auction = Auction.objects.get(pk=auction_id)
-        Watchlist.objects.filter(user=request.user, auction=auction).delete()
+        if add_item:
+            auction = Auction.objects.get(pk=add_item)
+            watchlist_entry = Watchlist(user=request.user, auction=auction)
+            watchlist_entry.save()
+        elif remove_item:
+            auction = Auction.objects.get(pk=remove_item)
+            Watchlist.objects.filter(
+                user=request.user, auction=auction).delete()
     watching = Watchlist.objects.filter(user=request.user)
     return render(request, "auctions/watchlist.html", {
         "watching": watching

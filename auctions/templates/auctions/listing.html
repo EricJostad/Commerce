@@ -12,15 +12,15 @@
     <p>Current Bid: ${{ auction.current_bid }}</p>
     {% if user.is_authenticated %}
         {% if is_watching %}
-            <form action="{% url 'auctions:watchlist' %}" method="get">
+            <form action="{% url 'auctions:watchlist' %}" method="post">
                 {% csrf_token %}
-                <input type="hidden" name="auction_id" value="{{ auction.id }}">
+                <input type="hidden" name="remove" value="{{ auction.id }}">
                 <button type="submit">Remove from Watchlist</button>
             </form>
         {% else %}
             <form action="{% url 'auctions:watchlist' %}" method="post">
                 {% csrf_token %}
-                <input type="hidden" name="auction_id" value="{{ auction.id }}">
+                <input type="hidden" name="add" value="{{ auction.id }}">
                 <button type="submit">Add to Watchlist</button>
             </form>
         {% endif %}
