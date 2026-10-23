@@ -11,6 +11,9 @@
     <p>{{ auction.description }}</p>
     <p>Current Bid: ${{ auction.current_bid }}</p>
     {% if user.is_authenticated %}
+        {% if auction.user == user %}
+            Delete Listing
+        {% endif %}
         {% if is_watching %}
             <form action="{% url 'auctions:watchlist' %}" method="post">
                 {% csrf_token %}
