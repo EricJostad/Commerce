@@ -106,6 +106,10 @@ def watchlist(request):
         auction = Auction.objects.get(pk=auction_id)
         watchlist_entry = Watchlist(user=request.user, auction=auction)
         watchlist_entry.save()
+    if request.method == "GET":
+        auction_id = request.GET.get("auction_id")
+        auction = Auction.objects.get(pk=auction_id)
+        Watchlist.objects.filter(user=request.user, auction=auction).delete()
     watching = Watchlist.objects.filter(user=request.user)
     return render(request, "auctions/watchlist.html", {
         "watching": watching
