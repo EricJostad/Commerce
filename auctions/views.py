@@ -100,6 +100,12 @@ def create_listing(request):
     return render(request, "auctions/create_listing.html")
 
 
+def delete_listing(request, auction_id):
+    auction = Auction.objects.get(pk=auction_id)
+    auction.delete()
+    return HttpResponseRedirect(reverse("auctions:index"))
+
+
 def watchlist(request):
     add_item = request.POST.get("add")
     remove_item = request.POST.get("remove")

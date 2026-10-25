@@ -10,6 +10,6 @@
     <form  method="post">
         {% csrf_token %}
         <button type="submit">Yes, Delete</button>
-        <a href="{% url 'auctions:listing' auction.id %}">Cancel</a>
+        <a href="{% url 'auctions:listing' auction.id auction.title %}">Cancel</a>
     </form>
 {% endblock %}

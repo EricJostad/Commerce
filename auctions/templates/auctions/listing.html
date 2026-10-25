@@ -12,7 +12,7 @@
     <p>Current Bid: ${{ auction.current_bid }}</p>
     {% if user.is_authenticated %}
         {% if auction.user == user %}
-            Delete Listing
+            <a href="{% url 'auctions:delete_listing' auction.id %}">Delete Listing</a>
         {% else %}
             {% if is_watching %}
                 <form action="{% url 'auctions:watchlist' %}" method="post">
