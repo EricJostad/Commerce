@@ -13,7 +13,8 @@ class AuctionForm(forms.ModelForm):
     class Meta:
         model = Auction
         fields = ["title", "description",
-                  "starting_bid", "image_url", "category"]
+                  "starting_bid", "image_url"]
+        categories = CATEGORIES
 
 
 def index(request):
@@ -96,7 +97,8 @@ def create_listing(request):
             return HttpResponseRedirect(reverse("auctions:index"))
     else:
         return render(request, "auctions/create_listing.html", {
-            "form": AuctionForm()
+            "form": AuctionForm(),
+            "categories": CATEGORIES
         })
     return render(request, "auctions/create_listing.html")
 
