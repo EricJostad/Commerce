@@ -10,6 +10,7 @@ CATEGORIES = [
     "Home & Garden",
     "Sports",
     "Toys",
+    "Tools",
     "Vehicles",
     "Video Games",
     "Other"
