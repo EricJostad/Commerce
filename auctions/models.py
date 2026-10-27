@@ -16,7 +16,7 @@ class Auction(models.Model):
         max_digits=10, decimal_places=2, default=0.0)
     image_url = models.URLField(blank=True, default="Paste image URL here")
     category = models.CharField(
-        max_length=64, blank=True, default="Select category")
+        max_length=64, blank=True, default="")
 
 
 class Bid(models.Model):
