@@ -128,4 +128,6 @@ def watchlist(request):
 
 
 def categories(request):
-    return render(request, "auctions/categories.html")
+    return render(request, "auctions/categories.html", {
+        "categories": CATEGORIES
+    })
