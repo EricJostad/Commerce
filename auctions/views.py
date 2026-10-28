@@ -88,19 +88,19 @@ def listing(request, auction_id, auction_title):
 
 
 def create_listing(request):
+    form = AuctionForm()
     if request.method == "POST":
         form = AuctionForm(request.POST)
         if form.is_valid():
             auction = form.save(commit=False)
             auction.user = request.user
+            auction.category = request.POST.get("category")
             auction.save()
             return HttpResponseRedirect(reverse("auctions:index"))
-    else:
-        return render(request, "auctions/create_listing.html", {
-            "form": AuctionForm(),
-            "categories": CATEGORIES
-        })
-    return render(request, "auctions/create_listing.html")
+    return render(request, "auctions/create_listing.html", {
+        "form": form,
+        "categories": CATEGORIES
+    })
 
 
 def delete_listing(request, auction_id):
