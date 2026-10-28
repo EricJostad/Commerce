@@ -16,5 +16,7 @@ urlpatterns = [
     path("watchlist", views.watchlist, name="watchlist"),
     path("delete_listing/<int:auction_id>",
          views.delete_listing, name="delete_listing"),
-    path("categories", views.categories, name="categories")
+    path("categories", views.categories, name="categories"),
+    path("categories/<str:category>",
+         views.category_listings, name="category")
 ]

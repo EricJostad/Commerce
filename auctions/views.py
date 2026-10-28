@@ -131,3 +131,9 @@ def categories(request):
     return render(request, "auctions/categories.html", {
         "categories": CATEGORIES
     })
+
+
+def category_listings(request, category):
+    return render(request, "auctions/category.html", {
+        "category": category
+    })
