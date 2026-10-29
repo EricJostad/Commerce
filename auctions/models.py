@@ -20,7 +20,7 @@ class Auction(models.Model):
         max_digits=10, decimal_places=2, validators=[MinValueValidator(Decimal("0.01"))])
     image_url = models.URLField(blank=True)
     category = models.CharField(
-        max_length=64, blank=True)
+        max_length=64)
 
 
 class Bid(models.Model):
