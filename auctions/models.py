@@ -1,8 +1,10 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
-
+from django.core.validators import MinValueValidator
 
 # At this time, no additional fields need to be added to the User model, since it inherits all necessary fields from AbstractUser.
+
+
 class User(AbstractUser):
     pass
 
@@ -13,7 +15,7 @@ class Auction(models.Model):
     description = models.TextField(
         blank=True)
     starting_bid = models.DecimalField(
-        max_digits=10, decimal_places=2, default=0.0)
+        max_digits=10, decimal_places=2, validators=[MinValueValidator(0.01)])
     image_url = models.URLField(blank=True)
     category = models.CharField(
         max_length=64, blank=True)
@@ -23,7 +25,7 @@ class Bid(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     auction = models.ForeignKey(Auction, on_delete=models.CASCADE)
     bid_amount = models.DecimalField(
-        max_digits=10, decimal_places=2, default=0.0)
+        max_digits=10, decimal_places=2, validators=[MinValueValidator(0.01)])
 
 
 class Comment(models.Model):

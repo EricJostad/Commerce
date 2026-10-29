@@ -17,6 +17,7 @@ class AuctionForm(forms.ModelForm):
         widgets = {
             "title": forms.TextInput(attrs={"placeholder": "Enter auction title"}),
             "description": forms.Textarea(attrs={"placeholder": "Enter auction description"}),
+            "starting_bid": forms.NumberInput(attrs={"placeholder": "Enter starting bid"}),
             "image_url": forms.URLInput(attrs={"placeholder": "Paste image URL here"}),
         }
         categories = CATEGORIES
