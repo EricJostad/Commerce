@@ -6,12 +6,13 @@
     <form action="{% url 'auctions:create_listing' %}" method="post">
         {% csrf_token %}
         {{ form }}
+        <label for="category">Category:</label>
         <select name="category" id="category">
-            <option value="">Select a category</option>
             {% for category in categories %}
                 <option value="{{ category }}">{{ category }}</option>
             {% endfor %}
         </select>
-        <input type="submit" value="Create Listing">
+        <br><input type="submit" value="Create Listing"><br>
+    </form>
     
 {% endblock %}  

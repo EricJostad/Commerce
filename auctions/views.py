@@ -19,8 +19,8 @@ class AuctionForm(forms.ModelForm):
             "description": forms.Textarea(attrs={"placeholder": "Enter auction description"}),
             "starting_bid": forms.NumberInput(attrs={"min": "0.01", "step": "0.01", "placeholder": "Enter starting bid"}),
             "image_url": forms.URLInput(attrs={"placeholder": "Paste image URL here"}),
+            "category": forms.Select(choices=CATEGORIES)
         }
-        categories = CATEGORIES
 
 
 def index(request):
