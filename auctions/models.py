@@ -9,12 +9,12 @@ class User(AbstractUser):
 
 class Auction(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    title = models.CharField(max_length=150, default="Enter auction title")
+    title = models.CharField(max_length=150, default="")
     description = models.TextField(
-        blank=True, default="Enter auction description")
+        blank=True, default="")
     starting_bid = models.DecimalField(
         max_digits=10, decimal_places=2, default=0.0)
-    image_url = models.URLField(blank=True, default="Paste image URL here")
+    image_url = models.URLField(blank=True, default="")
     category = models.CharField(
         max_length=64, blank=True, default="")
 
