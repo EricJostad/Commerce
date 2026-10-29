@@ -2,7 +2,7 @@ from decimal import Decimal
 
 from django.contrib.auth.models import AbstractUser
 from django.db import models
-from django.core.validators import MinValueValidator
+from django.core.validators import MaxValueValidator, MinValueValidator
 
 # At this time, no additional fields need to be added to the User model, since it inherits all necessary fields from AbstractUser.
 
@@ -15,7 +15,7 @@ class Auction(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=150)
     description = models.TextField(
-        blank=True)
+        validators=[MinValueValidator(20), MaxValueValidator(1000)])
     starting_bid = models.DecimalField(
         max_digits=10, decimal_places=2, validators=[MinValueValidator(Decimal("0.01"))])
     image_url = models.URLField(blank=True)
