@@ -6,6 +6,8 @@
         {% for auction in auctions %}
             <li>
                 <a href="{% url 'auctions:listing' auction.id auction.title %}">{{ auction.title }}</a>
+                <p>Current Price: ${{ auction.starting_bid }}</p>
+                <p>{{ auction.description }}</p>
             </li>
         {% empty %}
             <li>No active listings.</li>
