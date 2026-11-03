@@ -8,18 +8,31 @@
 
 {% block body %}
     <h2>Listing: {{ auction.title }}</h2>
+    {% if auction.image_url %}
+        <img src="{{ auction.image_url }}" alt="{{ auction.title }}" width="300" height="300">
+    {% endif %}
     <p>{{ auction.description }}</p>
     <p>Starting Bid: ${{ auction.starting_bid }}</p>
     <p>Current Bid: ${{ auction.current_bid }}</p>
     <h4>Details:</h4>
     <ul>
-        <p>Category: <a href="{% url 'auctions:category' auction.category %}">{{ auction.category }}</a></p>
-        <p>Listed by: {{ auction.user.username }}</p>
+        <li><p>Category: <a href="{% url 'auctions:category' auction.category %}">{{ auction.category }}</a></p></li>
+        <li><p>Listed by: {{ auction.user.username }}</p></li>
     </ul>
     {% if user.is_authenticated %}
         {% if auction.user == user %}
-            <a href="{% url 'auctions:delete_listing' auction.id %}">Delete Listing</a>
+            <h4>Actions:</h4>
+            <ul>
+                <li>Edit Listing</li>
+                <li>Close Listing</li>
+                <li><a href="{% url 'auctions:delete_listing' auction.id %}">Delete Listing</a></li>
+            </ul>
         {% else %}
+            <h4>Actions:</h4>
+            <ul>
+                <li>Place a Bid</li>
+                <li>Comment</li>
+            </ul>
             {% if is_watching %}
                 <form action="{% url 'auctions:watchlist' %}" method="post">
                     {% csrf_token %}
