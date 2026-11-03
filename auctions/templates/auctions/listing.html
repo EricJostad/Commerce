@@ -16,8 +16,8 @@
     <p>Current Bid: ${{ auction.current_bid }}</p>
     <h4>Details:</h4>
     <ul>
-        <li><p>Category: <a href="{% url 'auctions:category' auction.category %}">{{ auction.category }}</a></p></li>
-        <li><p>Listed by: {{ auction.user.username }}</p></li>
+        <li>Category: <a href="{% url 'auctions:category' auction.category %}">{{ auction.category }}</a></li>
+        <li>Listed by: {{ auction.user.username }}</li>
     </ul>
     {% if user.is_authenticated %}
         <h4>Actions:</h4>
