@@ -7,6 +7,7 @@ CATEGORIES = [
     "Collectibles",
     "Clothing",
     "Electronics",
+    "Games",
     "Home & Garden",
     "Sports",
     "Toys",
