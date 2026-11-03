@@ -7,11 +7,13 @@
 {% endblock %}
 
 {% block body %}
-    <h2>{{ auction.title }}</h2>
+    <h2>Listing: {{ auction.title }}</h2>
     <p>{{ auction.description }}</p>
     <p><a href="{% url 'auctions:category' auction.category %}">{{ auction.category }}</a></p>
     <p>Starting Bid: ${{ auction.starting_bid }}</p>
     <p>Current Bid: ${{ auction.current_bid }}</p>
+    <h3>Details:</h3>
+    <p>Category: <a href="{% url 'auctions:category' auction.category %}">{{ auction.category }}</a></p>
     {% if user.is_authenticated %}
         {% if auction.user == user %}
             <a href="{% url 'auctions:delete_listing' auction.id %}">Delete Listing</a>
