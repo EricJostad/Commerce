@@ -20,15 +20,14 @@
         <li><p>Listed by: {{ auction.user.username }}</p></li>
     </ul>
     {% if user.is_authenticated %}
+        <h4>Actions:</h4>
         {% if auction.user == user %}
-            <h4>Actions:</h4>
             <ul>
                 <li>Edit Listing</li>
                 <li>Close Listing</li>
                 <li><a href="{% url 'auctions:delete_listing' auction.id %}">Delete Listing</a></li>
             </ul>
         {% else %}
-            <h4>Actions:</h4>
             <ul>
                 <li>Place a Bid</li>
                 <li>Comment</li>
