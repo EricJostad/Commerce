@@ -29,6 +29,18 @@ class AuctionForm(forms.ModelForm):
         }
 
 
+class BidForm(forms.ModelForm):
+    class Meta:
+        model = Bid
+        fields = ["bid_amount"]
+        labels = {
+            "bid_amount": "Bid Amount $",
+        }
+        widgets = {
+            "bid_amount": forms.NumberInput(attrs={"min": "0.01", "step": "0.01", "placeholder": "Enter your bid"}),
+        }
+
+
 def index(request):
     auction = Auction.objects.all()
     return render(request, "auctions/index.html", {
