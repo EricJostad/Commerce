@@ -12,8 +12,11 @@
         <img src="{{ auction.image_url }}" alt="Image of a {{ auction.title }}" width="300">
     {% endif %}
     <p>{{ auction.description }}</p>
-    <p>Starting Bid: ${{ auction.starting_bid }}</p>
-    <p>Current Bid: ${{ auction.current_bid }}</p>
+    {% if highest_bid %}
+        <p>Current Bid: ${{ highest_bid.bid_amount }}</p>
+    {% else %}
+        <p>Starting Bid: ${{ auction.starting_bid }}</p>
+    {% endif %}
     <h4>Details:</h4>
     <ul>
         <li>Category: <a href="{% url 'auctions:category' auction.category %}">{{ auction.category }}</a></li>

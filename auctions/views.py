@@ -102,12 +102,15 @@ def register(request):
 
 def listing(request, auction_id, auction_title):
     auction = Auction.objects.get(pk=auction_id)
+    highest_bid = Bid.objects.filter(
+        auction=auction).order_by('-bid_amount').first()
     is_watching = Watchlist.objects.filter(
         user=request.user, auction=auction).exists()
     return render(request, "auctions/listing.html", {
         "auction": auction,
         "auction_title": auction_title,
-        "is_watching": is_watching
+        "is_watching": is_watching,
+        "highest_bid": highest_bid
     })
 
 
