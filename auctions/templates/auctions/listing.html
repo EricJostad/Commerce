@@ -9,7 +9,7 @@
 {% block body %}
     <h2>Listing: {{ auction.title }}</h2>
     {% if auction.image_url %}
-        <img src="{{ auction.image_url }}" alt="Image of a {{ auction.title }}" width="300" height="300">
+        <img src="{{ auction.image_url }}" alt="Image of a {{ auction.title }}" width="300">
     {% endif %}
     <p>{{ auction.description }}</p>
     <p>Starting Bid: ${{ auction.starting_bid }}</p>
