@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth import authenticate, login, logout
 from django.db import IntegrityError
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, request
 from django.shortcuts import render
 from django.urls import reverse
 
@@ -34,10 +34,10 @@ class BidForm(forms.ModelForm):
         model = Bid
         fields = ["bid_amount"]
         labels = {
-            "bid_amount": "Bid Amount $",
+            "bid_amount": "",
         }
         widgets = {
-            "bid_amount": forms.NumberInput(attrs={"min": "0.01", "step": "0.01", "placeholder": "Enter your bid"}),
+            "bid_amount": forms.NumberInput(attrs={"min": "0.01", "step": "0.01", "placeholder": "Enter your bid $"}),
         }
 
 
@@ -104,12 +104,14 @@ def listing(request, auction_id, auction_title):
     auction = Auction.objects.get(pk=auction_id)
     highest_bid = Bid.objects.filter(
         auction=auction).order_by('-bid_amount').first()
+    form = BidForm()
     is_watching = Watchlist.objects.filter(
         user=request.user, auction=auction).exists()
     return render(request, "auctions/listing.html", {
         "auction": auction,
         "auction_title": auction_title,
         "is_watching": is_watching,
+        "form": form,
         "highest_bid": highest_bid
     })
 

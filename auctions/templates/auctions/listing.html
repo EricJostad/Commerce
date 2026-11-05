@@ -32,7 +32,12 @@
             </ul>
         {% else %}
             <ul>
-                <li>Place a Bid</li>
+                <form action="{% url 'auctions:listing' auction.id auction.title %}" method="post">
+                    {% csrf_token %}
+                    {{ form }}
+                    <input type="hidden" name="auction_id" value="{{ auction.id }}">
+                    <input type="submit" value="Place Bid">
+                </form>
                 <li>Comment</li>
             </ul>
             {% if is_watching %}
