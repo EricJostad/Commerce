@@ -17,13 +17,13 @@ class AuctionForm(forms.ModelForm):
         labels = {
             "title": "Title",
             "description": "Description",
-            "starting_bid": "Starting Bid $",
+            "starting_bid": "Starting Bid",
             "image_url": "Image URL",
         }
         widgets = {
             "title": forms.TextInput(attrs={"placeholder": "Enter auction title"}),
             "description": forms.Textarea(attrs={"minlength": "20", "maxlength": "1000", "placeholder": "Enter auction description"}),
-            "starting_bid": forms.NumberInput(attrs={"min": "0.01", "step": "0.01", "placeholder": "Enter starting bid"}),
+            "starting_bid": forms.NumberInput(attrs={"min": "0.01", "step": "0.01", "placeholder": "Enter starting bid $"}),
             "image_url": forms.URLInput(attrs={"placeholder": "Optional image URL here"}),
             "category": forms.Select(choices=CATEGORIES)
         }
@@ -44,7 +44,7 @@ class BidForm(forms.ModelForm):
 def index(request):
     auction = Auction.objects.all()
     return render(request, "auctions/index.html", {
-        "auctions": auction
+        "auctions": auction,
     })
 
 
