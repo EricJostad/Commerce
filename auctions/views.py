@@ -112,11 +112,19 @@ def listing(request, auction_id, auction_title):
     if request.method == "POST":
         form = BidForm(request.POST)
         if form.is_valid():
-            bid = form.save(commit=False)
-            bid.user = request.user
-            bid.auction = auction
-            bid.save()
-            return HttpResponseRedirect(reverse("auctions:listing", args=(auction.id, auction.title)))
+            bid_amount = form.cleaned_data["bid_amount"]
+            if highest_bid and bid_amount <= highest_bid.bid_amount:
+                form.add_error(
+                    "bid_amount", "Your bid must be higher than the current highest bid.")
+            elif bid_amount < auction.starting_bid:
+                form.add_error(
+                    "bid_amount", "Your bid must be at least the starting bid amount.")
+            else:
+                bid = form.save(commit=False)
+                bid.user = request.user
+                bid.auction = auction
+                bid.save()
+                return HttpResponseRedirect(reverse("auctions:listing", args=(auction.id, auction.title)))
     is_watching = Watchlist.objects.filter(
         user=request.user, auction=auction).exists()
     return render(request, "auctions/listing.html", {
