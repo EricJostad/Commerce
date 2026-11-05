@@ -42,9 +42,9 @@ class BidForm(forms.ModelForm):
 
 
 def index(request):
-    auction = Auction.objects.all()
+    auctions = Auction.objects.all()
     return render(request, "auctions/index.html", {
-        "auctions": auction,
+        "auctions": auctions,
     })
 
 
