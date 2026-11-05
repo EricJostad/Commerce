@@ -8,8 +8,8 @@
                 <a href="{% url 'auctions:listing' auction.id auction.title %}">{{ auction.title }}</a>
                 <img src="{{ auction.image_url }}" width="100">
                 <p>{{ auction.description }}</p>
-                    {% if highest_bid %}
-                        <p>Current Bid: ${{ highest_bid.bid_amount }}</p>
+                    {% if auction.highest_bid %}
+                        <p>Current Bid: ${{ auction.highest_bid.bid_amount }}</p>
                     {% else %}
                         <p>Starting Bid: ${{ auction.starting_bid }}</p>
                     {% endif %}

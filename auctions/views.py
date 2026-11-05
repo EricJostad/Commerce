@@ -43,6 +43,10 @@ class BidForm(forms.ModelForm):
 
 def index(request):
     auctions = Auction.objects.all()
+    for auction in auctions:
+        highest_bid = Bid.objects.filter(
+            auction=auction).order_by('-bid_amount').first()
+        auction.highest_bid = highest_bid
     return render(request, "auctions/index.html", {
         "auctions": auctions,
     })
