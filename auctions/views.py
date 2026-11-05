@@ -105,6 +105,14 @@ def listing(request, auction_id, auction_title):
     highest_bid = Bid.objects.filter(
         auction=auction).order_by('-bid_amount').first()
     form = BidForm()
+    if request.method == "POST":
+        form = BidForm(request.POST)
+        if form.is_valid():
+            bid = form.save(commit=False)
+            bid.user = request.user
+            bid.auction = auction
+            bid.save()
+            return HttpResponseRedirect(reverse("auctions:listing", args=(auction.id, auction.title)))
     is_watching = Watchlist.objects.filter(
         user=request.user, auction=auction).exists()
     return render(request, "auctions/listing.html", {
