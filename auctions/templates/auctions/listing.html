@@ -31,15 +31,12 @@
                 <li><a href="{% url 'auctions:delete_listing' auction.id %}">Delete Listing</a></li>
             </ul>
         {% else %}
-            <ul>
-                <form action="{% url 'auctions:listing' auction.id auction.title %}" method="post">
-                    {% csrf_token %}
-                    {{ form }}
-                    <input type="hidden" name="auction_id" value="{{ auction.id }}">
-                    <input type="submit" value="Place Bid">
-                </form>
-                <li>Comment</li>
-            </ul>
+            <form action="{% url 'auctions:listing' auction.id auction.title %}" method="post">
+                {% csrf_token %}
+                {{ form }}
+                <input type="hidden" name="auction_id" value="{{ auction.id }}">
+                <input type="submit" value="Place Bid">
+            </form>
             {% if is_watching %}
                 <form action="{% url 'auctions:watchlist' %}" method="post">
                     {% csrf_token %}
@@ -64,5 +61,15 @@
         </ul>
     {% else %}
         <p>No comments yet - be the first!</p>
+    {% endif %}
+    {% if user.is_authenticated %}
+        <form action="{% url 'auctions:listing' auction.id auction.title %}" method="post">
+            {% csrf_token %}
+            {{ comment_form }}
+            <input type="hidden" name="auction_id" value="{{ auction.id }}">
+            <input type="submit" value="Submit Comment">
+        </form>
+    {% else %}
+        <p><a href="{% url 'login' %}">Log in</a> to leave a comment.</p>
     {% endif %}
 {% endblock %}
