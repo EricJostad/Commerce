@@ -50,7 +50,7 @@ class CommentForm(forms.ModelForm):
             "user": "",
         }
         widgets = {
-            "content": forms.Textarea(attrs={"minlength": "1", "maxlength": "500", "placeholder": "Enter your comment here"}),
+            "content": forms.Textarea(attrs={"minlength": "1", "maxlength": "500", "placeholder": "Join the conversation..."})
         }
 
 
