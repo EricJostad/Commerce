@@ -41,6 +41,19 @@ class BidForm(forms.ModelForm):
         }
 
 
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ["content", "user"]
+        labels = {
+            "content": "",
+            "user": "",
+        }
+        widgets = {
+            "content": forms.Textarea(attrs={"minlength": "1", "maxlength": "500", "placeholder": "Enter your comment here"}),
+        }
+
+
 def index(request):
     auctions = Auction.objects.all()
     for auction in auctions:
