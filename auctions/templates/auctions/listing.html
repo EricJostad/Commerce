@@ -52,7 +52,7 @@
             {% endif %}
         {% endif %}
     {% endif %}
-    <h4>Comments:</h4>
+    {% comment %} <h4>Comments:</h4>
     {% if comments %}
         <ul>
             {% for comment in comments %}
@@ -71,5 +71,5 @@
         </form>
     {% else %}
         <p><a href="{% url 'login' %}">Log in</a> to leave a comment.</p>
-    {% endif %}
+    {% endif %} {% endcomment %}
 {% endblock %}

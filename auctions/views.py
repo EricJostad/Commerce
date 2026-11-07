@@ -138,8 +138,11 @@ def listing(request, auction_id, auction_title):
                 bid.auction = auction
                 bid.save()
                 return HttpResponseRedirect(reverse("auctions:listing", args=(auction.id, auction.title)))
-    is_watching = Watchlist.objects.filter(
-        user=request.user, auction=auction).exists()
+    if request.user.is_authenticated:
+        is_watching = Watchlist.objects.filter(
+            user=request.user, auction=auction).exists()
+    else:
+        is_watching = False
     return render(request, "auctions/listing.html", {
         "auction": auction,
         "auction_title": auction_title,
