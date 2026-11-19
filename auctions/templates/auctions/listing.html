@@ -52,16 +52,7 @@
             {% endif %}
         {% endif %}
     {% endif %}
-    {% comment %} <h4>Comments:</h4>
-    {% if comments %}
-        <ul>
-            {% for comment in comments %}
-                <li>{{ comment.user.username }}: {{ comment.comment_text }}</li>
-            {% endfor %}
-        </ul>
-    {% else %}
-        <p>No comments yet - be the first!</p>
-    {% endif %}
+<h4>Comments:</h4>
     {% if user.is_authenticated %}
         <form action="{% url 'auctions:listing' auction.id auction.title %}" method="post">
             {% csrf_token %}
@@ -70,6 +61,6 @@
             <input type="submit" value="Submit Comment">
         </form>
     {% else %}
-        <p><a href="{% url 'login' %}">Log in</a> to leave a comment.</p>
-    {% endif %} {% endcomment %}
+        <p><a href="{% url 'auctions:login' %}">Log in</a> to leave a comment.</p>
+    {% endif %}
 {% endblock %}

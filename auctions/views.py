@@ -121,7 +121,8 @@ def listing(request, auction_id, auction_title):
     auction = Auction.objects.get(pk=auction_id)
     highest_bid = Bid.objects.filter(
         auction=auction).order_by('-bid_amount').first()
-    form = BidForm()
+    bid_form = BidForm()
+    comment_form = CommentForm()
     if request.method == "POST":
         form = BidForm(request.POST)
         if form.is_valid():
@@ -147,7 +148,8 @@ def listing(request, auction_id, auction_title):
         "auction": auction,
         "auction_title": auction_title,
         "is_watching": is_watching,
-        "form": form,
+        "bid_form": bid_form,
+        "comment_form": comment_form,
         "highest_bid": highest_bid
     })
 
