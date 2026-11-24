@@ -39,10 +39,9 @@ class BidForm(forms.ModelForm):
 class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
-        fields = ["content", "user"]
+        fields = ["content"]
         labels = {
             "content": "",
-            "user": "",
         }
         widgets = {
             "content": forms.Textarea(attrs={"minlength": "1", "maxlength": "500", "placeholder": "Join the conversation..."})
