@@ -95,7 +95,6 @@ def listing(request, auction_id, auction_title):
                 bid.user = request.user
                 bid.auction = auction
                 bid.save()
-                comment_form = CommentForm(request.POST)
         if comment_form.is_valid():
             comment = comment_form.save(commit=False)
             comment.user = request.user
