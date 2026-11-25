@@ -94,8 +94,13 @@ def listing(request, auction_id, auction_title):
                 bid.user = request.user
                 bid.auction = auction
                 bid.save()
-                return HttpResponseRedirect(reverse("auctions:listing", args=(auction.id, auction.title)))
     if request.user.is_authenticated:
+        comment_form = CommentForm(request.POST)
+        if comment_form.is_valid():
+            comment = comment_form.save(commit=False)
+            comment.user = request.user
+            comment.auction = auction
+            comment.save()
         is_watching = Watchlist.objects.filter(
             user=request.user, auction=auction).exists()
     else:
