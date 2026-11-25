@@ -80,27 +80,28 @@ def listing(request, auction_id, auction_title):
     bid_form = BidForm()
     comment_form = CommentForm()
     if request.method == "POST":
-        form = BidForm(request.POST)
-        if form.is_valid():
-            bid_amount = form.cleaned_data["bid_amount"]
+        bid_form = BidForm(request.POST)
+        comment_form = CommentForm(request.POST)
+        if bid_form.is_valid():
+            bid_amount = bid_form.cleaned_data["bid_amount"]
             if highest_bid and bid_amount <= highest_bid.bid_amount:
-                form.add_error(
+                bid_form.add_error(
                     "bid_amount", "Your bid must be higher than the current highest bid.")
             elif bid_amount < auction.starting_bid:
-                form.add_error(
+                bid_form.add_error(
                     "bid_amount", "Your bid must be at least the starting bid amount.")
             else:
-                bid = form.save(commit=False)
+                bid = bid_form.save(commit=False)
                 bid.user = request.user
                 bid.auction = auction
                 bid.save()
-    if request.user.is_authenticated:
-        comment_form = CommentForm(request.POST)
+                comment_form = CommentForm(request.POST)
         if comment_form.is_valid():
             comment = comment_form.save(commit=False)
             comment.user = request.user
             comment.auction = auction
             comment.save()
+    if request.user.is_authenticated:
         is_watching = Watchlist.objects.filter(
             user=request.user, auction=auction).exists()
     else:
