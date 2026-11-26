@@ -56,7 +56,7 @@
     {% if comments %}
         <ul>
             {% for comment in comments %}
-                <strong>{{ comment.user.username }}:</strong> 
+                <p><strong>{{ comment.user.username }}:</strong></p>
                 <p>{{ comment.content }}</p>
                 ---------------------------------
             {% endfor %}
