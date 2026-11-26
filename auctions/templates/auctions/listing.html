@@ -53,6 +53,17 @@
         {% endif %}
     {% endif %}
 <h4>Comments:</h4>
+    {% if comments %}
+        <ul>
+            {% for comment in comments %}
+                <strong>{{ comment.user.username }}:</strong> 
+                <p>{{ comment.content }}</p>
+                ---------------------------------
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No comments yet.</p>
+    {% endif %}
     {% if user.is_authenticated %}
         <form action="{% url 'auctions:listing' auction.id auction.title %}" method="post">
             {% csrf_token %}

@@ -75,6 +75,7 @@ def register(request):
 
 def listing(request, auction_id, auction_title):
     auction = Auction.objects.get(pk=auction_id)
+    comments = Comment.objects.filter(auction=auction)
     highest_bid = Bid.objects.filter(
         auction=auction).order_by('-bid_amount').first()
     bid_form = BidForm()
@@ -96,10 +97,17 @@ def listing(request, auction_id, auction_title):
                 bid.auction = auction
                 bid.save()
         if comment_form.is_valid():
-            comment = comment_form.save(commit=False)
-            comment.user = request.user
-            comment.auction = auction
-            comment.save()
+            if comment_form.cleaned_data["content"].strip() == "":
+                comment_form.add_error(
+                    "content", "Comment cannot be blank.")
+            elif len(comment_form.cleaned_data["content"]) > 500:
+                comment_form.add_error(
+                    "content", "Comment cannot exceed 500 characters.")
+            else:
+                comment = comment_form.save(commit=False)
+                comment.user = request.user
+                comment.auction = auction
+                comment.save()
     if request.user.is_authenticated:
         is_watching = Watchlist.objects.filter(
             user=request.user, auction=auction).exists()
@@ -111,6 +119,7 @@ def listing(request, auction_id, auction_title):
         "is_watching": is_watching,
         "bid_form": bid_form,
         "comment_form": comment_form,
+        "comments": comments,
         "highest_bid": highest_bid
     })
 
